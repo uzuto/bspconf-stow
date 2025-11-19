@@ -4,7 +4,7 @@ Updated **BSPWM** dotfiles
 
 installation:
 
-`echo "--target=~">>~/.stowrc`
+`echo "--target=~">>~/.stowrc`\
 `git clone https:/github.com/uzuto/bspconf-stow && cd bspconf-stow && stow -t */`
 
 Checklist
