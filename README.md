@@ -3,9 +3,7 @@
 Updated **BSPWM** dotfiles
 
 installation:
-`git clone https:/github.com/uzuto/bspconf-stow \
-cd bspconf-stow \
-stow .`
+`git clone https:/github.com/uzuto/bspconf-stow && cd bspconf-stow && stow .`
 
 Checklist
 
