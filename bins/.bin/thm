@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+	## Set you wallpaper directory here.
+    echo "Enter Wallpaer Directory"
+    read WALLDIR
+	BSPDIR="/home/uzuto/.config/bspwm"
+	WALFILE="$HOME/.cache/wal/colors.sh"
+	THEMEDIR="$BSPDIR/themes"
+	
+	if [[ `which wal` ]]; then
+		dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/hourglass.png "Generating Colorscheme. Please wait..."
+		wal -q -n -s -t -e -i "$WALLDIR"
+		if [[ "$?" != 0 ]]; then
+			dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "Failed to generate colorscheme."
+			exit
+		fi
+		if [[ -f "$WALFILE" ]]; then
+			cat "$WALFILE" > "$THEMEDIR"/current.bash
+			echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
+			bspc wm -r
+		fi
+	else
+		dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' is not installed."
+	fi

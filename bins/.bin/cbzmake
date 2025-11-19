@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Iterate over each directory in the current directory
+for dir in */; do
+  # Remove trailing slash from directory name
+  dir=${dir%/}
+
+  # Create the .cbz filename with the original folder name
+  filename="${dir}.cbz"
+
+  # Compress the directory into a .cbz file
+  zip -r "${filename}" "${dir}"
+
+  # Output a message indicating the compression result
+  if [ $? -eq 0 ]; then
+    echo "Successfully compressed ${dir} into ${filename}"
+  else
+    echo "Failed to compress ${dir}"
+  fi
+done

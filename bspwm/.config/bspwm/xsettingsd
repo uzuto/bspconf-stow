@@ -1,0 +1,13 @@
+#Net/ThemeName "ZorinPurple-Dark"
+Net/ThemeName "Graphite-red-Dark-compact"
+Net/IconThemeName "ZorinRed-Dark"
+#Net/IconThemeName "Mint-Y-Blue"
+#Net/IconThemeName "ZorinBlue-Dark"
+Gtk/CursorThemeName "Qogir cursors"
+Net/EnableEventSounds "0"
+Net/EnableInputFeedbackSounds "0"
+Xft/DPI 127795
+#Xft/Hinting 1
+#Xft/HintStyle "hintslight"
+#Xft/Antialias 1
+#Xft/RGBA "none"

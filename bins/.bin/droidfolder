@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo chmod -R 777 ~/.local/share/waydroid/data/media
+thunar ~/.local/share/waydroid/data/media/0

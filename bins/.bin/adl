@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Liscenced under GPL-v3
+# Author : UzutoNarumaki
+# Original Name : single-rss-hayai
+# Deps : fzf,ariac,xmlstarlet
+# This script fetches link with title so its hayai!
+
+version=0.3
+# Update: Now, just type in search as argument, no need to hardcode rss url.
+
+RSS_URL="https://nyaa.si/?page=rss&q=$1&c=1_2&f=0"
+entries=$(curl -s "$RSS_URL" | xmlstarlet sel -t -m "//item" -v "concat(title, \"|\", link)" -n)
+
+if [[ -z $entries ]]; then
+    echo "No entries found in the RSS feed."
+    exit 1
+fi
+
+selected_entry=$(echo "$entries" | fzf --prompt="Select an entry to download: " --delimiter="|" --preview-window=hidden)
+
+if [[ -z $selected_entry ]]; then
+    echo "No entry selected. Exiting."
+    exit 0
+fi
+
+selected_link=$(echo "$selected_entry" | awk -F '|' '{print $2}')
+
+aria2c --summary-interval=0 --console-log-level=warn --seed-time=0 "$selected_link"
+
+rm ./*.torrent

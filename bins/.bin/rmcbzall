@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while true; do
+    read -p "Do you wish to delete all 'cbz' files in this folder ?" yn
+    case $yn in
+        [Yy]* ) find . -depth -name '*.cbz' -exec rm {} \;; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done

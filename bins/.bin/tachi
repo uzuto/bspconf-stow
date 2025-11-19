@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+TACHIDIR="$HOME/Softwares/Tachidesk"
+$TACHIDIR/tachidesk_sorayomi &
+$TACHIDIR/tachidesk-server.sh

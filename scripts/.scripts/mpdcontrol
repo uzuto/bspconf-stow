@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+export MPD_HOST=$HOME/.mpd/socket
+pkill mpd
+pkill mpDris2
+mpd
+mpDris2

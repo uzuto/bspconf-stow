@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REMOTES=$(rclone listremotes | sed 's/:.*//' | uniq)  # Get a list of all available remotes
+REMOTE_NAME=$(echo "$REMOTES" | fzf)  # Use fzf to select a remote
+
+if [ -z "$REMOTE_NAME" ]; then  # Check if a remote was selected
+    echo "No remote selected. Exiting..."
+    exit 1
+fi
+
+LOCAL_DIR="/home/uzuto/mnt"  # Replace with the path to your local mount point
+
+# Check if the remote directory is already mounted
+if mountpoint -q "$LOCAL_DIR"; then
+    echo "Remote directory is already mounted. Unmounting..."
+    fusermount -u "$LOCAL_DIR"
+fi
+
+# Mount the remote directory
+echo "Mounting remote directory..."
+rclone mount "$REMOTE_NAME": "$LOCAL_DIR" \
+    --daemon \
