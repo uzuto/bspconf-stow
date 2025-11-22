@@ -1,6 +1,6 @@
 # bspconf-stow
 
-Updated **BSPWM** dotfiles
+My Personal **BSPWM** dotfiles
 
 installation:
 
