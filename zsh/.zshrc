@@ -195,7 +195,8 @@ alias ytdl-4k='yt-dlp -f "bestvideo[ext=mp4][height<=2160]+bestaudio[ext=m4a]/be
 # system stuff
 alias genlink='sudo ~/Softwares/ventoy/VentoyVlnk.sh -c'
 alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias gensyslog="sudo journalctl -b | curl -F 'file=@-' 0x0.st"
+alias gensyslog="sudo journalctl -b | curl --data-binary @- https://paste.rs"
+# Old pastebin : curl -F 'file=@-' 0x0.st
 alias logup="curl -F 'file=@-' 0x0.st"
 alias tb="nc termbin.com 9999"
 alias startsmb="sudo systemctl start smb nmb"
@@ -211,7 +212,7 @@ alias screendown='xset -display :0.0 dpms force off'
 alias lolsrch='xdg-open "$(lolcate | rofi -threads 0 -width 160 -dmenu -i -p "lolcate:" -theme "~/.bin/anitheme/lolcate.rasi")"'
 
 # ASUS TUF A15 stuff
-alias rogc="weston -- rog-control-center"
+alias rogc="cage rog-control-center"
 alias cat="bat"
 #source /home/uzuto/.local/pipx/venvs/fastanime/fastanime.zsh
 
