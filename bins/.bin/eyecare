@@ -1,0 +1,6 @@
+#!/bin/bash
+while true; do
+    sleep 1200
+    zenity --info --text="Look away for 20 seconds" --title="20-20-20" --timeout=20
+done
+
