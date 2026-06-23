@@ -222,3 +222,4 @@ alias droid="WAYLAND_DISPLAY=wayland-1 && weston --shell="kiosk-shell.so" --full
 alias igpuhdmi="xrandr --setprovideroutputsource 1 0 && xrandr --auto"
 alias edit="fresh"
 alias x="exit"
+alias syncprog="watch -n 0.5 'grep -e Dirty: -e Writeback: /proc/meminfo'"
