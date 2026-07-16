@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Check if a file argument was provided
+if [ -z "$1" ]; then
+    echo "Error: No file specified."
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+INPUT_FILE="$1"
+
+# Verify the file actually exists
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "Error: File '$INPUT_FILE' not found."
+    exit 1
+fi
+
+# Create the output directory
+OUTPUT_DIR="compressed"
+mkdir -p "$OUTPUT_DIR"
+
+echo "=================================================="
+echo "Processing: $INPUT_FILE"
+echo "=================================================="
+
+# Check extension (case-insensitive) for MPEG-2 formats
+if [[ "$INPUT_FILE" =~ \.(mpg|mpeg|ts|MPG|MPEG|TS)$ ]]; then
+    echo "MPEG-2 detected. Applying CUDA deinterlacing..."
+    ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i "$INPUT_FILE" \
+      -vf "yadif_cuda=mode=send_frame" \
+      -c:v hevc_nvenc -preset p6 -rc vbr -cq 28 -b:v 0 \
+      -c:a copy \
+      "$OUTPUT_DIR/$INPUT_FILE"
+else
+    echo "Standard/AVC video detected. Encoding progressive..."
+    ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i "$INPUT_FILE" \
+      -c:v hevc_nvenc -preset p6 -rc vbr -cq 29 -b:v 0 \
+      -c:a copy \
+      "$OUTPUT_DIR/$INPUT_FILE"
+fi
+
+echo "Done! Saved to $OUTPUT_DIR/$INPUT_FILE"
