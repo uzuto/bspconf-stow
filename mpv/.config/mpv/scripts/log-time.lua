@@ -1,6 +1,3 @@
--- Initialize: Change this to true if a specific episode starts in the PAST
-local is_past = true
-
 local function format_time(seconds)
     local hours = math.floor(seconds / 3600)
     local mins = math.floor((seconds % 3600) / 60)
@@ -22,19 +19,12 @@ mp.add_key_binding("v", "log_timestamp", function()
 
     local log_path = video_path .. "-time.txt"
     local formatted_timestamp = format_time(time)
-    
-    -- Determine the label and flip the state for the next press
-    local label = is_past and "PAST" or "PRESENT"
-    is_past = not is_past
-
-    -- Format: HH:MM:SS.mmm LABEL
-    local line_to_write = string.format("%s %s\n", formatted_timestamp, label)
 
     local file = io.open(log_path, "a")
     if file then
-        file:write(line_to_write)
+        file:write(formatted_timestamp .. "\n")
         file:close()
-        mp.osd_message("Logged: " .. formatted_timestamp .. " " .. label)
+        mp.osd_message("Logged: " .. formatted_timestamp)
     else
         mp.osd_message("Error: Could not write to file")
     end
