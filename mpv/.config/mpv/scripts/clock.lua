@@ -46,7 +46,7 @@ mp.observe_property("mouse-pos", "native", function(_, val)
         hide_timer:kill()
     end
 
-    hide_timer = mp.add_timeout(1.0, function()
+    hide_timer = mp.add_timeout(0.5, function()
         clock_overlay:remove()
     end)
 end)
