@@ -8,7 +8,7 @@ local function format_time(seconds)
     return string.format("%02d:%02d:%02d.%03d", hours, mins, secs, msecs)
 end
 
-mp.add_key_binding("v", "log_timestamp", function()
+mp.add_key_binding("x", "log_timestamp", function()
     local time = mp.get_property_number("time-pos", 0)
     local video_path = mp.get_property("path")
     
